@@ -21,6 +21,7 @@ export const HeaderArea = styled.div`
     align-items: center;
     height: 60px;
     margin-left: 10px;
+    font-family: 'Nunito';
 
     .logo-1,
     .logo-2,
