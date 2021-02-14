@@ -4,6 +4,8 @@ import { Switch, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import About from "./pages/About";
+import NotFound from "./pages/NotFound";
+import Login from "./pages/Login";
 
 export default () => {
   return (
@@ -11,8 +13,17 @@ export default () => {
       <Route exact path="/">
         <Home />
       </Route>
+
       <Route exact path="/about">
         <About />
+      </Route>
+
+      <Route exact path="/sign-in">
+        <Login />
+      </Route>
+
+      <Route>
+        <NotFound />
       </Route>
     </Switch>
   );

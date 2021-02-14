@@ -75,6 +75,7 @@ export const HeaderArea = styled.div`
           border-radius: 25px;
           color: white;
           padding: 5px 10px;
+          font-weight: bold;
         }
 
         &.button:hover {
