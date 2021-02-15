@@ -62,17 +62,22 @@ export const HeaderArea = styled.div`
       margin-left: 20px;
       margin-right: 20px;
 
-      a {
+      a, button {
         color: black;
         font-size: 14px;
         text-decoration: none;
+        border: 0;
+        background: none;
+        cursor: pointer;
+        font-family: 'Nunito Sans';
+        outline: 0;
 
         &:hover {
           color: #999;
         }
 
         &.button {
-          background-color: #FF8100;
+          background-color: #F78323;
           border-radius: 25px;
           color: white;
           padding: 5px 10px;
@@ -80,7 +85,7 @@ export const HeaderArea = styled.div`
         }
 
         &.button:hover {
-          background-color: #E57706;
+          background-color: #F99D53;
         }
       }
     }

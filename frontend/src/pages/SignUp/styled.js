@@ -24,7 +24,7 @@ export const PageArea = styled.div`
 
     .area-input {
       flex: 1;
-      input {
+      input, select {
         width: 100%;
         font-size: 14px;
         padding: 5px;
@@ -32,6 +32,7 @@ export const PageArea = styled.div`
         border-radius: 5px;
         outline: 0;
         transition: all ease 0.4s;
+        font-family: 'Nunito Sans';
 
         &:focus {
           border: 1px solid #333;

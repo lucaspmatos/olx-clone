@@ -1,6 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 import Cookies from "js-cookie";
-import qs from 'qs';
+import qs from "qs";
 
 const BASE_URL = "http://alunos.b7web.com.br:501";
 
@@ -15,7 +15,7 @@ const apiFetchPost = async (endpoint, body) => {
   const res = await fetch(BASE_URL + endpoint, {
     method: "POST",
     headers: {
-      "Accept": "application/json",
+      Accept: "application/json",
       "Content-Type": "application/json",
     },
     body: JSON.stringify(body),
@@ -54,6 +54,11 @@ const OlxAPI = {
   login: async (email, password) => {
     const json = await apiFetchPost("/user/signin", { email, password });
     return json;
+  },
+
+  getStates: async () => {
+    const json = await apiFetchGet("/states");
+    return json.states;
   },
 };
 
