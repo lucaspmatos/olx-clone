@@ -89,7 +89,7 @@ export const PageArea = styled.div`
     justify-content: space-between;
 
     .adItem {
-      width: 24%;
+      width: 32%;
     }
   }
 
