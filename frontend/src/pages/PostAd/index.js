@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useHistory } from "react-router-dom";
 import { PageArea } from "./styled";
 import MaskedInput from "react-text-mask";
 import createNumberMask from "text-mask-addons/dist/createNumberMask";
@@ -13,6 +14,7 @@ import useApi from "../../helpers/OlxAPI";
 export default function Page() {
   const api = useApi();
   const fileField = useRef();
+  const history = useHistory();
 
   const [categories, setCategories] = useState([]);
 
@@ -38,14 +40,46 @@ export default function Page() {
     setDisabled(true);
     setError("");
 
-    /* const json = await api.login(email, password);
+    let errors = [];
 
-    if (json.error) {
-      setError(json.error);
+    if (!title.trim()) {
+      errors.push("Não é permitido anúncio sem título!");
+    }
+
+    if (!category) {
+      errors.push("É obrigatório ter uma categoria para o anúncio.");
+    }
+
+    if (errors.length === 0) {
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("price", price);
+      formData.append("priceneg", priceNegotiable);
+      formData.append("desc", description);
+      formData.append("cat", category);
+
+      const existImage = fileField.current.files.length;
+
+      if (existImage > 0) {
+        const images = fileField.current.files;
+
+        for (let i = 0; i < images.length; i += 1) {
+          formData.append('img', images.item(i));
+        }
+      }
+
+      const json = await api.postAd(formData);
+
+      if (!json.error) {
+        history.push(`/ad/${json.id}`);
+        return;
+      } else {
+        setError(json.error);
+      }
+      
     } else {
-      doLogin(json.token, rememberPassword);
-      window.location.href = "/";
-    } */
+      setError(errors.join("\n"));
+    }
 
     setDisabled(false);
   };
