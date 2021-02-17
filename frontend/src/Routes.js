@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import SignUp from './pages/SignUp';
 import AdPage from './pages/AdPage';
 import PostAd from './pages/PostAd';
+import Ads from './pages/Ads';
 
 export default () => {
   return (
@@ -36,6 +37,10 @@ export default () => {
 
       <RouteHandler private exact path="/post-ad">
         <PostAd />
+      </RouteHandler>
+
+      <RouteHandler exact path="/ads">
+        <Ads />
       </RouteHandler>
 
       <RouteHandler>

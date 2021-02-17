@@ -33,7 +33,7 @@ export default function Page() {
     const getRecentAds = async () => {
       const json = await api.getAds({
         sort: "asc",
-        limit: 3,
+        limit: 4,
       });
       setAdList(json.ads);
     };
