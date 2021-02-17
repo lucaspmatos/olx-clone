@@ -1,6 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch } from "react-router-dom";
+import RouteHandler from './components/RouteHandler';
 
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -8,33 +9,38 @@ import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import SignUp from './pages/SignUp';
 import AdPage from './pages/AdPage';
+import PostAd from './pages/PostAd';
 
 export default () => {
   return (
     <Switch>
-      <Route exact path="/">
+      <RouteHandler exact path="/">
         <Home />
-      </Route>
+      </RouteHandler>
 
-      <Route exact path="/about">
+      <RouteHandler exact path="/about">
         <About />
-      </Route>
+      </RouteHandler>
 
-      <Route exact path="/sign-in">
+      <RouteHandler exact path="/sign-in">
         <Login />
-      </Route>
+      </RouteHandler>
       
-      <Route exact path="/sign-up">
+      <RouteHandler exact path="/sign-up">
         <SignUp />
-      </Route>
+      </RouteHandler>
 
-      <Route exact path="/ad/:id">
+      <RouteHandler exact path="/ad/:id">
         <AdPage />
-      </Route>
+      </RouteHandler>
 
-      <Route>
+      <RouteHandler private exact path="/post-ad">
+        <PostAd />
+      </RouteHandler>
+
+      <RouteHandler>
         <NotFound />
-      </Route>
+      </RouteHandler>
     </Switch>
   );
 };
