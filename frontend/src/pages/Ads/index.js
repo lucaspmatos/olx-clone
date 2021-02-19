@@ -6,10 +6,12 @@ import AdItem from "../../components/partials/AdItem";
 
 import useApi from "../../helpers/OlxAPI";
 
+let timer;
+
 export default function Page() {
   const api = useApi();
   const history = useHistory();
-
+  
   const useQueryString = () => {
     return new URLSearchParams(useLocation().search);
   };
@@ -28,6 +30,20 @@ export default function Page() {
   const [categories, setCategories] = useState([]);
   const [adList, setAdList] = useState([]);
 
+  const [resultOpacity, setResultOpacity] = useState(1);
+
+  const getAdsList = async () => {
+    const json = await api.getAds({
+      sort: "asc",
+      limit: 9,
+      query,
+      category,
+      state,
+    });
+    setAdList(json.ads);
+    setResultOpacity(1);
+  };
+
   useEffect(() => {
     let queryString = [];
 
@@ -44,8 +60,17 @@ export default function Page() {
     }
 
     history.replace({
-      search: `${queryString.join('&')}`
+      search: `${queryString.join("&")}`,
     });
+
+    if (timer) {
+      clearTimeout(timer);
+    }
+
+    timer = setTimeout(getAdsList, 2000);
+    setResultOpacity(0.2);
+
+    getAdsList();
   }, [query, category, state]);
 
   useEffect(() => {
@@ -62,17 +87,6 @@ export default function Page() {
       setCategories(categories);
     };
     getCategories();
-  }, []);
-
-  useEffect(() => {
-    const getRecentAds = async () => {
-      const json = await api.getAds({
-        sort: "asc",
-        limit: 3,
-      });
-      setAdList(json.ads);
-    };
-    getRecentAds();
   }, []);
 
   return (
@@ -118,7 +132,14 @@ export default function Page() {
               </ul>
             </form>
           </div>
-          <div className="rightSide">...</div>
+          <div className="rightSide">
+            <h2>Resultados</h2>
+            <div className="list" style={{opacity: resultOpacity}}>
+              {adList.map((i, k) => (
+                <AdItem key={k} data={i} />
+              ))}
+            </div>
+          </div>
         </PageArea>
       </PageContainer>
     </>
