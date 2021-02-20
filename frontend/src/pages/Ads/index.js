@@ -31,12 +31,14 @@ export default function Page() {
   const [categories, setCategories] = useState([]);
   const [adList, setAdList] = useState([]);
   const [pageCount, setPageCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const [resultOpacity, setResultOpacity] = useState(1);
   const [loading, setLoading] = useState(true);
 
   const getAdsList = async () => {
     setLoading(true);
+    let offset = (currentPage - 1) * 9;
 
     const json = await api.getAds({
       sort: "asc",
@@ -44,6 +46,7 @@ export default function Page() {
       query,
       category,
       state,
+      offset,
     });
     setAdList(json.ads);
     setAdsTotal(json.total);
@@ -53,11 +56,16 @@ export default function Page() {
 
   useEffect(() => {
     if (adList.length > 0) {
-    setPageCount(Math.ceil(adsTotal/adList.length));
+      setPageCount(Math.ceil(adsTotal / adList.length));
     } else {
       setPageCount(0);
     }
   }, [adsTotal]);
+
+  useEffect(() => {
+    setResultOpacity(0.2);
+    getAdsList();
+  }, [currentPage]);
 
   useEffect(() => {
     let queryString = [];
@@ -84,6 +92,7 @@ export default function Page() {
 
     timer = setTimeout(getAdsList, 2000);
     setResultOpacity(0.2);
+    setCurrentPage(1);
 
     getAdsList();
   }, [query, category, state]);
@@ -155,7 +164,7 @@ export default function Page() {
           </div>
           <div className="rightSide">
             <h2>Resultados</h2>
-            {loading && <div className="listWarning">Carregando...</div>}
+            {loading && adList.length === 0 && <div className="listWarning">Carregando...</div>}
             {!loading && adList.length === 0 && (
               <div className="listWarning">Nenhum resultado encontrado</div>
             )}
@@ -167,9 +176,15 @@ export default function Page() {
             </div>
 
             <div className="pagination">
-              {pagination.map((i, k) => 
-                <div className="page">{i}</div>
-              )}
+              {pagination.map((i, k) => (
+                <div
+                  key={k}
+                  onClick={() => setCurrentPage(i)}
+                  className={i === currentPage ? "page active" : "page"}
+                >
+                  {i}
+                </div>
+              ))}
             </div>
           </div>
         </PageArea>

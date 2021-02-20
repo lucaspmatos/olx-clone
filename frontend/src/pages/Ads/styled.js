@@ -53,7 +53,7 @@ export const PageArea = styled.div`
 
     .category:hover,
     .category.active {
-      background-color:#9BB83C;
+      background-color: #9bb83c;
       color: white;
     }
   }
@@ -83,6 +83,7 @@ export const PageArea = styled.div`
 
     .pagination {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: center;
       margin: 10px 0;
@@ -90,13 +91,25 @@ export const PageArea = styled.div`
       .page {
         width: 30px;
         height: 30px;
-        border: 1px solid #000;
+        border: 1px solid black;
         display: flex;
         justify-content: center;
         align-items: center;
+        margin: 2px;
         font-size: 14px;
-        margin-right: 5px;
         border-radius: 5px;
+        cursor: pointer;
+
+        &:hover {
+          border: 2px solid #f78323;
+        }
+
+        &.active {
+          background-color: #f78323;
+          color: white;
+          border: none;
+          font-weight: bold;
+        }
       }
     }
   }
