@@ -11,7 +11,7 @@ let timer;
 export default function Page() {
   const api = useApi();
   const history = useHistory();
-  
+
   const useQueryString = () => {
     return new URLSearchParams(useLocation().search);
   };
@@ -31,8 +31,11 @@ export default function Page() {
   const [adList, setAdList] = useState([]);
 
   const [resultOpacity, setResultOpacity] = useState(1);
+  const [loading, setLoading] = useState(true);
 
   const getAdsList = async () => {
+    setLoading(true);
+
     const json = await api.getAds({
       sort: "asc",
       limit: 9,
@@ -42,6 +45,7 @@ export default function Page() {
     });
     setAdList(json.ads);
     setResultOpacity(1);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -134,7 +138,12 @@ export default function Page() {
           </div>
           <div className="rightSide">
             <h2>Resultados</h2>
-            <div className="list" style={{opacity: resultOpacity}}>
+            {loading && <div className="listWarning">Carregando...</div>}
+            {!loading && adList.length === 0 && (
+              <div className="listWarning">Nenhum resultado encontrado</div>
+            )}
+
+            <div className="list" style={{ opacity: resultOpacity }}>
               {adList.map((i, k) => (
                 <AdItem key={k} data={i} />
               ))}
