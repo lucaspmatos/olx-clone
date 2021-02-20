@@ -80,5 +80,24 @@ export const PageArea = styled.div`
         width: 32%;
       }
     }
+
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 10px 0;
+
+      .page {
+        width: 30px;
+        height: 30px;
+        border: 1px solid #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+        margin-right: 5px;
+        border-radius: 5px;
+      }
+    }
   }
 `;
