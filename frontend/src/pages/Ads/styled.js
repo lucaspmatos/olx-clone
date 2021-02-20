@@ -113,4 +113,51 @@ export const PageArea = styled.div`
       }
     }
   }
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    margin-top: 5px;
+
+    .leftSide {
+      width: auto;
+      margin: 10px;
+
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+
+        li {
+          width: 50%;
+        }
+      }
+
+      .category {
+        img {
+          width: 35px;
+          height: 35px;
+        }
+
+        span {
+          font-size: 16px;
+        }
+      }
+    }
+
+    .rightSide {
+      margin: 10px;
+
+      h2 {
+        text-align: center;
+        font-size: 25px;
+      }
+
+      .list {
+        justify-content: space-around;
+      }
+
+      .list .adItem {
+        width: 48%;
+      }
+    }
+  }
 `;

@@ -106,7 +106,7 @@ export const SearchArea = styled.div`
 
 export const PageArea = styled.div`
   h2 {
-    font-size: 20px;
+    font-size: 25px;
   }
 
   .list {

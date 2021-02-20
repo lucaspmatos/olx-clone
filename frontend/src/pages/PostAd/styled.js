@@ -12,7 +12,7 @@ export const PageArea = styled.div`
     display: flex;
     align-items: center;
     padding: 10px;
-    max-width: 500px;
+    max-width: 600px;
 
     .area-title {
       width: 200px;
@@ -61,6 +61,29 @@ export const PageArea = styled.div`
 
         &:hover {
           background-color: #F99D53;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    form {
+      .area {
+        flex-direction: column;
+
+        .area-title {
+          width: 100%;
+          text-align: left;
+          margin-bottom: 3px;
+        }
+
+        .area-input {
+          width: 100%;
+
+          button {
+            width: 100%;
+            padding: 10px;
+          }
         }
       }
     }
